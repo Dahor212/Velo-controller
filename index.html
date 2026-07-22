@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<!-- Viewport tuned for iPhone 11 Safari landscape, no scaling / zoom -->
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+>
+<title>VELO CONTROLLER</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Shown only in portrait orientation via CSS -->
+  <div id="rotate-overlay" class="rotate-overlay">
+    <p>Otočte telefon na šířku</p>
+  </div>
+
+  <div id="app" class="app">
+
+    <!-- 1. Top info bar -->
+    <header class="topbar">
+      <div class="topbar-left">VELO CONTROLLER</div>
+      <div class="topbar-center">Camera: <span id="camera-label">Rear</span></div>
+      <div class="topbar-right">
+        <span id="connection-dot" class="status-dot offline"></span>
+        <span id="connection-text">OFFLINE</span>
+      </div>
+    </header>
+
+    <!-- 2. Main control area -->
+    <main class="main">
+
+      <!-- Left column: camera controls -->
+      <section class="panel camera-panel">
+        <h2 class="panel-title">CAMERA</h2>
+
+        <div class="camera-grid">
+          <button class="btn cam-btn active" data-camera="rear" data-command="camera_rear">REAR</button>
+          <button class="btn cam-btn" data-camera="front" data-command="camera_front">FRONT</button>
+          <button class="btn cam-btn" data-camera="left" data-command="camera_left">LEFT</button>
+          <button class="btn cam-btn" data-camera="right" data-command="camera_right">RIGHT</button>
+          <button class="btn cam-btn" data-camera="top" data-command="camera_top">TOP</button>
+        </div>
+
+        <div class="camera-nav">
+          <button class="btn nav-btn" data-command="camera_previous">◀ PREVIOUS CAMERA</button>
+          <button class="btn nav-btn" data-command="camera_next">NEXT CAMERA ▶</button>
+        </div>
+      </section>
+
+      <!-- Right column: rider / UI controls -->
+      <section class="panel rider-panel">
+        <h2 class="panel-title">RIDER / UI</h2>
+
+        <div class="rider-nav">
+          <button class="btn rider-btn" data-command="rider_previous">◀ PREVIOUS RIDER</button>
+          <button class="btn rider-btn" data-command="rider_next">NEXT RIDER ▶</button>
+        </div>
+
+        <button class="btn wide-btn" data-command="toggle_leaderboard">LEADERBOARD</button>
+        <button class="btn wide-btn" data-command="toggle_hud">TOGGLE HUD</button>
+
+        <div class="tactical-panel" aria-disabled="true">
+          Tactical controls coming later
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 3. Bottom status bar -->
+    <footer class="statusbar">
+      <div class="status-left">Selected rider: <span id="selected-rider">Player</span></div>
+      <div class="status-center">Command: <span id="command-label">None</span></div>
+      <div class="status-right">v0.1</div>
+    </footer>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
