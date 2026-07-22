@@ -99,6 +99,13 @@
         <path d="M4 5h16v14H4z"/>
         <path d="M7.3 9.5l3 2.5-3 2.5M12.8 14.5h4"/>
       </symbol>
+      <symbol id="icon-helicopter" viewBox="0 0 24 24">
+        <ellipse cx="9.5" cy="14.5" rx="5.5" ry="3.1"/>
+        <path d="M15 14h6.5"/>
+        <path d="M4.5 7.5h11"/>
+        <path d="M10 10V7.5"/>
+        <path d="M6 17.6h6.5M6.8 17.6v1.8M12 17.6v1.8"/>
+      </symbol>
     </defs>
   </svg>
 
@@ -125,7 +132,7 @@
       <div class="topbar-right">
         <div class="status-block">
           <span class="status-tag">STATUS</span>
-          <div class="status-value">
+          <div id="connection-value" class="status-value offline">
             <span id="connection-dot" class="status-dot offline"></span>
             <span id="connection-text">OFFLINE</span>
           </div>
@@ -169,6 +176,10 @@
             <svg class="cam-icon"><use href="#icon-cam-top"></use></svg>
             <span>NAD JEZDCEM</span>
           </button>
+          <button class="btn cam-btn" data-camera="helicopter" data-command="camera_helicopter">
+            <svg class="cam-icon"><use href="#icon-helicopter"></use></svg>
+            <span>HELIKOPTÉRA</span>
+          </button>
         </div>
 
         <div class="camera-nav">
@@ -209,47 +220,45 @@
           </div>
         </div>
 
-        <button class="btn switch-row" data-command="toggle_hud">
+        <button class="btn switch-row" data-command="toggle_hud" data-enabled="true">
           <svg class="icon"><use href="#icon-eye"></use></svg>
           <span class="switch-label">HUD</span>
           <span class="switch" aria-hidden="true"><span class="switch-knob"></span></span>
         </button>
 
-        <button class="btn switch-row" data-command="toggle_leaderboard">
+        <button class="btn switch-row" data-command="toggle_leaderboard" data-enabled="true">
           <svg class="icon"><use href="#icon-list"></use></svg>
           <span class="switch-label">LEADERBOARD</span>
           <span class="switch" aria-hidden="true"><span class="switch-knob"></span></span>
         </button>
 
-        <!-- Visual placeholder only: no data-command, not wired to script.js -->
-        <div class="switch-row locked" aria-disabled="true">
+        <button class="btn switch-row" data-command="toggle_name_tags" data-enabled="true">
           <svg class="icon"><use href="#icon-users"></use></svg>
-          <span class="switch-label">JMENOVKY</span>
-          <span class="soon-tag">BRZY</span>
-        </div>
+          <span class="switch-label">JMENOVKY JEZDCŮ</span>
+          <span class="switch" aria-hidden="true"><span class="switch-knob"></span></span>
+        </button>
       </section>
 
-      <!-- Race column - visual placeholder for a future race-control panel -->
-      <section class="panel race-panel locked" aria-disabled="true">
+      <!-- Race column - now wired to pause_race / resume_race / restart_race -->
+      <section class="panel race-panel">
         <h2 class="panel-title">
           <svg class="icon"><use href="#icon-flag"></use></svg>
           ZÁVOD
         </h2>
 
-        <div class="race-btn">
+        <button class="btn race-btn" data-command="pause_race">
           <svg class="icon"><use href="#icon-pause"></use></svg>
           PAUZA
-        </div>
-        <div class="race-btn">
+        </button>
+        <button class="btn race-btn" data-command="resume_race">
           <svg class="icon"><use href="#icon-play"></use></svg>
           POKRAČOVAT
-        </div>
-        <div class="race-btn race-btn-danger">
+        </button>
+        <!-- restart_race is only sent after the confirm() dialog in script.js -->
+        <button class="btn race-btn race-btn-danger" data-command="restart_race">
           <svg class="icon"><use href="#icon-restart"></use></svg>
           RESTARTOVAT ZÁVOD
-        </div>
-
-        <span class="soon-tag soon-tag-block">PŘIPRAVUJEME</span>
+        </button>
       </section>
 
     </main>
@@ -266,23 +275,21 @@
 
       <span class="status-divider" aria-hidden="true"></span>
 
-      <!-- Visual placeholder: no timestamp tracking in script.js yet -->
       <div class="status-cell">
         <svg class="icon"><use href="#icon-clock"></use></svg>
         <div class="status-cell-text">
           <span class="status-cell-label">ČAS PŘÍKAZU</span>
-          <span class="status-cell-value muted">--:--:--</span>
+          <span class="status-cell-value muted" id="command-time">--:--:--</span>
         </div>
       </div>
 
       <span class="status-divider" aria-hidden="true"></span>
 
-      <!-- Visual placeholder: no counter in script.js yet -->
       <div class="status-cell">
         <svg class="icon"><use href="#icon-send"></use></svg>
         <div class="status-cell-text">
           <span class="status-cell-label">ODESLANÉ PŘÍKAZY</span>
-          <span class="status-cell-value muted">0</span>
+          <span class="status-cell-value muted" id="command-count">0</span>
         </div>
       </div>
 

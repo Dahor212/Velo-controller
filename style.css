@@ -311,6 +311,20 @@ button {
   font-size: 0.86em;
   font-weight: 700;
   letter-spacing: 1px;
+  color: var(--white);
+}
+
+/* Connection state text color follows the dot (offline/connecting/online) */
+.status-value.offline {
+  color: var(--red);
+}
+
+.status-value.connecting {
+  color: #ff9500;
+}
+
+.status-value.online {
+  color: var(--green);
 }
 
 .status-dot {
@@ -477,19 +491,19 @@ button {
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr;
-  gap: var(--gap);
+  gap: calc(var(--gap) - 2px);
 }
 
 .cam-btn {
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   min-height: 55px;
   color: var(--grey);
-  font-size: calc(var(--font-title) - 1px);
-  letter-spacing: 0.5px;
-  padding: 6px 4px;
+  font-size: calc(var(--font-title) - 2px);
+  letter-spacing: 0.3px;
+  padding: 6px 2px;
 }
 
 .cam-btn span {
@@ -497,8 +511,8 @@ button {
 }
 
 .cam-icon {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.6;
@@ -606,6 +620,9 @@ button {
 .switch-label {
   flex: 1 1 auto;
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .switch {
@@ -629,72 +646,37 @@ button {
   background: #1a1a1a;
 }
 
-.switch-row.locked {
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.switch-row.locked .switch {
+/* Toggled-off visual state, driven by button[data-enabled="false"] in script.js */
+.switch.off {
   background: var(--grey-dim);
   border-color: var(--line-strong);
 }
 
-.switch-row.locked .switch-knob {
+.switch.off .switch-knob {
+  right: auto;
+  left: 2px;
   background: #2a2c32;
 }
 
-.soon-tag {
-  flex: 0 0 auto;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: var(--grey);
-  border: 1px solid var(--line-strong);
-  border-radius: 4px;
-  padding: 2px 5px;
-  margin-left: 6px;
-}
-
-/* -------------------- Race panel (visual placeholder) -------------------- */
-
-.race-panel {
-  opacity: 0.85;
-}
-
-.race-panel .panel-title {
-  opacity: 0.9;
-}
+/* -------------------- Race panel -------------------- */
 
 .race-btn {
   flex: 1 1 auto;
   min-height: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   gap: 8px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, var(--panel-bg-alt), var(--panel-bg));
-  color: var(--grey);
-  font-weight: 600;
   font-size: calc(var(--font-base) - 1px);
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  opacity: 0.65;
 }
 
 .race-btn-danger {
-  border-color: rgba(255, 59, 48, 0.35);
-  color: rgba(255, 130, 122, 0.8);
+  border-color: rgba(255, 59, 48, 0.4);
+  color: #ff8177;
 }
 
-.race-panel.locked {
-  pointer-events: none;
-}
-
-.soon-tag-block {
-  align-self: center;
-  margin: 2px 0 0;
+.race-btn-danger.pressed,
+.race-btn-danger:active {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red-glow), 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* -------------------- Bottom telemetry strip -------------------- */
